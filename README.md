@@ -146,7 +146,7 @@ Rancangan basis data terdiri dari **10 entitas**: `Pengguna`, `Admin`, `Staff`, 
 #### 📌 ERD Relational
 ![ERD Relational](img/erd-relational.jpg)
  
-🔗 [Klik di sini untuk melihat ERD Lengkap](LINK_ERD_DISINI)
+📎 [Klik di sini untuk melihat ERD Lengkap](https://drive.google.com/drive/folders/1mCzmc85rA1FsEleD3EEAYkn8AMJl5ZtO?usp=sharing)
  
 <details>
 <summary><b>📋 Relasi dan Kardinalitas</b></summary>
@@ -250,6 +250,13 @@ capstone_feast_part_2/
 ---
 
 ## 6. 🧱 Penerapan 4 Pilar OOP
+Program ini menerapkan empat pilar OOP, terutama pada hierarki class pengguna (`Pengguna` → `Admin` dan `Staff`) dan alur login.
+ 
+### 1️⃣ Encapsulation (Enkapsulasi)   
+Seluruh atribut pada class `Pengguna` dideklarasikan **`private`**, sehingga tidak dapat diakses langsung dari luar class. Data hanya bisa dibaca dan diubah melalui **getter dan setter** yang bersifat `public`. Prinsip yang sama dipakai pada class `Admin` (`tanggalDiangkat`) dan `Staff` (`shift`, `password`).
+ 
+📄 `model/Pengguna.java`
+
  
 ---
  
