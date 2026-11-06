@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🥖 FEAST
+# Sistem Informasi Pengelolaan Stok Bahan Baku, Produksi, dan Distribusi Produk Jadi Berbasis Java
 
-### Sistem Informasi Pengelolaan Stok Bahan Baku, Produksi, dan Distribusi Produk Jadi Berbasis Java
+### Feats
 
-*Produse Roti Kemasan*
+*Produsen Roti*
 
 </div>
 
@@ -81,3 +81,190 @@ Sistem ini dilengkapi dengan:
 | `protobuf-java-3.25.1.jar` | Pendukung MySQL Connector/J untuk pertukaran data dengan database |
  
 ---
+ 
+## 4. 🧩 Perancangan Sistem
+ 
+### 4.1 Use Case Diagram
+ 
+Dua aktor: **Admin** dan **Staff**. Keduanya melakukan *login* sebelum dan *logout* setelah menggunakan sistem.
+ 
+![Use Case Diagram](img/usecase.jpg)   
+
+📎 [Klik di sini untuk melihat Use Case Diagram Lengkap](https://drive.google.com/file/d/1IFRrMQOYuadCL68XmWCmXrVNMFcLsWnm/view?usp=sharing)
+ 
+<details>
+<summary><b>📋 Daftar Use Case</b></summary>
+ 
+| No | Use Case | Aktor | Keterangan |
+|---|---|---|---|
+| 1 | Login | Admin, Staff | Validasi akun dan penentuan peran |
+| 2 | Kelola Data Bahan Baku (CRUD) | Admin | Tambah, lihat, ubah, hapus bahan baku |
+| 3 | Kelola Data Produk Jadi (CRUD) | Admin | Tambah, lihat, ubah, hapus produk |
+| 4 | Kelola Data Resep (CRUD) | Admin | Kelola resep produk |
+| 5 | Kelola Data Distributor | Admin | Kelola distributor tujuan |
+| 6 | Kelola Akun Staff | Admin | Daftarkan dan kelola akun staf + shift |
+| 7 | Lihat Dashboard | Admin | Ringkasan stok, peringatan, riwayat |
+| 8 | Kelola Produksi dan Batch | Staff | Hitung Kebutuhan Bahan, Validasi Stok Bahan, Simpan Batch, Perbarui Stok Produk Jadi |
+| 9 | Pemantauan Stok dan Kedaluwarsa | Staff | Peringatan Kedaluwarsa, Peringatan Stok Minimum |
+| 10 | Menu Distribusi Produk | Staff | Validasi Stok Produk, Pilih Batch FEFO, Kurangi Stok Produk Jadi |
+| 11 | Logout | Admin, Staff | Keluar dari sistem |
+ 
+</details>     
+
+### 4.2 Flowchart
+**Alur umum sistem:** Login → Pilih menu sesuai hak akses → Input data → Validasi (termasuk cek stok) → Simpan & perbarui stok *(atau tampilkan pesan agar diperbaiki)* → Tampilkan informasi.   
+
+📎 [Klik di sini untuk melihat Flowchart Lengkap](https://drive.google.com/file/d/1GwlGTXFSb7WqmNVU47pCVNrcJJwaFY_7/view?usp=sharing)  
+
+#### 🔐 Tampilan Utama (Login)
+![Flowchart Tampilan Utama](img/flow-tampilan-utama.png)
+ 
+#### 👷 Staff
+![Flowchart Staff](img/flow-staf.png)
+ 
+#### 🧑‍💼 Admin
+![Flowchart Admin](img/flow-admin.png)
+ 
+#### 🏭 Produksi
+![Flowchart Produksi](img/flow-produksi.png)
+ 
+#### 🚚 Distribusi
+![Flowchart Distribusi](img/flow-distribusi.png)
+ 
+#### 📊 Pemantauan Stok
+![Flowchart Pemantauan Stok](img/flow-pemantauan-stok.png)
+ 
+#### 🗂️ Data Master
+![Flowchart Data Master](img/flow-data-master.png)    
+ 
+### 4.3 ERD (Entity Relationship Diagram)    
+Rancangan basis data terdiri dari **10 entitas**: `Pengguna`, `Admin`, `Staff`, `Bahan_Baku`, `Produk`, `Detail_Resep`, `Produksi_Batch`, `Distributor`, `Distribusi`, dan `Detail_Distribusi_Batch`.
+ 
+#### 📌 ERD Logical
+![ERD Logical](img/erd-logical.jpg)
+ 
+#### 📌 ERD Relational
+![ERD Relational](img/erd-relational.jpg)
+ 
+🔗 [Klik di sini untuk melihat ERD Lengkap](LINK_ERD_DISINI)
+ 
+<details>
+<summary><b>📋 Relasi dan Kardinalitas</b></summary>
+ 
+| No | Relasi | Kardinalitas | Foreign Key |
+|---|---|---|---|
+| 1 | Distributor → Distribusi | 1:M | `Distributor_id_distributor` pada Distribusi |
+| 2 | Admin → Distributor | 1:M | `Admin_id_pengguna` pada Distributor |
+| 3 | Admin → Bahan_Baku | 1:M | `Admin_id_pengguna` pada Bahan_Baku |
+| 4 | Admin → Produk | 1:M | `Admin_id_pengguna` pada Produk |
+| 5 | Bahan_Baku → Detail_Resep | 1:M | `Bahan_Baku_id_bahan` pada Detail_Resep |
+| 6 | Produk → Detail_Resep | 1:M | `Produk_id_produk` pada Detail_Resep |
+| 7 | Produk → Produksi_Batch | 1:M | `Produk_id_produk` pada Produksi_Batch |
+| 8 | Staff → Produksi_Batch | 1:M | `Staff_Khusus_id_pengguna` pada Produksi_Batch |
+| 9 | Staff → Distribusi | 1:M | `Staff_id_pengguna` pada Distribusi |
+| 10 | Distribusi → Detail_Distribusi_Batch | 1:M | `Distribusi_id_distribusi` pada Detail_Distribusi_Batch |
+| 11 | Produksi_Batch → Detail_Distribusi_Batch | 1:M | `produksi_batch_id_batch` pada Detail_Distribusi_Batch |
+| 12 | Pengguna → Admin / Staff | Generalisasi (supertype–subtype) | `id_pengguna` (PK sekaligus FK) |
+ 
+</details>
+
+---
+
+## 5. 📁 Struktur Folder/Package
+ 
+Project dibangun dengan **Maven** di NetBeans dan menerapkan pola **MVC + DAO**: `view` untuk tampilan, `controller` untuk alur logika, `dao` untuk akses database, dan `model` untuk representasi data.
+ 
+```
+capstone_feast_part_2/
+├── src/main/java/capstone_feast/
+│   ├── Capstone_feast.java        # Main class (entry point aplikasi)
+│   │
+│   ├── config/  # Konfigurasi & sesi
+│   │   ├── DatabaseConnection.java
+│   │   ├── TesKoneksi.java
+│   │   └── UserSession.java
+│   │
+│   ├── model/  # Class entitas / data
+│   │   ├── Pengguna.java
+│   │   ├── Admin.java
+│   │   ├── Staff.java
+│   │   ├── BahanBaku.java
+│   │   ├── Produk.java
+│   │   ├── DetailResep.java
+│   │   ├── ProduksiModel.java
+│   │   ├── PemantauanModel.java
+│   │   ├── Distributor.java
+│   │   ├── DistribusiModel.java
+│   │   ├── DetailDistribusiBatch.java
+│   │   └── ComboItem.java
+│   │
+│   ├── dao/  # Akses database (query SQL)
+│   │   ├── AdminDaoInterface.java
+│   │   ├── DaoLoginInterface.java
+│   │   ├── LoginDao.java
+│   │   ├── AdminDao.java
+│   │   ├── StaffDao.java
+│   │   ├── BahanBakuDao.java
+│   │   ├── ProdukDao.java
+│   │   ├── ResepDao.java
+│   │   ├── DistributorDao.java
+│   │   ├── ProduksiDao.java
+│   │   ├── DistribusiDao.java
+│   │   ├── PemantauanDao.java
+│   │   ├── DashboardAdminDao.java
+│   │   └── DashboardStaffDao.java
+│   │
+│   ├── controller/  # Penghubung view dan dao
+│   │   ├── LoginController.java
+│   │   ├── RegisterController.java
+│   │   ├── AdminController.java
+│   │   ├── StaffController.java
+│   │   ├── BahanBakuController.java
+│   │   ├── ProdukController.java
+│   │   ├── ResepController.java
+│   │   ├── DistributorController.java
+│   │   ├── ProduksiController.java
+│   │   ├── DistribusiController.java
+│   │   ├── PemantauanController.java
+│   │   ├── DashboardAdminController.java
+│   │   └── DashboardStaffController.java
+│   │
+│   └── view/  # Tampilan GUI (Java Swing)
+│       ├── Login.java
+│       ├── Register.java
+│       ├── DashboardAdmin.java
+│       ├── DashboardStaff.java
+│       ├── BahanBaku.java
+│       ├── Produk.java
+│       ├── Resep.java
+│       ├── Distributor.java
+│       ├── KelolaAkunStaff.java
+│       ├── Produksi.java
+│       ├── Distribusi.java
+│       └── PemantauanStok.java
+│
+├── pom.xml                            # Konfigurasi Maven & dependensi
+
+```
+ 
+---
+
+## 6. 🧱 Penerapan 4 Pilar OOP
+ 
+---
+ 
+## 7. 💻 Cara Penggunaan Program
+  
+---
+ 
+## 8. 👥 Kontributor
+
+| No | Nama | NIM |
+|---|---|---|
+| 1 | Ahmad Ahdasuki | 2509116021 |
+| 2 | Rivalio Chendra | 2509116039 |
+| 3 | Muhammad Aqia Yudha Yulian Putra | 2509116105 |
+| 4 | Meilanie | 2509116109 |
+ 
+---
+ 
