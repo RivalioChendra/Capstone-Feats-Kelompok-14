@@ -13,7 +13,7 @@
 ## 📚 Daftar Isi
  
 1. [Deskripsi Singkat](#1--deskripsi-singkat)
-2. [Fitur Utama Program](#2--fitur-utama-program)  
+2. [Fitur Utama Program](2-%EF%B8%8F-fitur-utama-program)  
 3. [Tech Stack](#3--tech-stack)
 4. [Perancangan Sistem](#4--perancangan-sistem)
 5. [Struktur Folder/Package](#5--struktur-folderpackage)
