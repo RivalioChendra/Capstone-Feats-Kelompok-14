@@ -175,7 +175,7 @@ Rancangan basis data terdiri dari **10 entitas**: `Pengguna`, `Admin`, `Staff`, 
 Project dibangun dengan **Maven** di NetBeans dan menerapkan pola **MVC + DAO**: `view` untuk tampilan, `controller` untuk alur logika, `dao` untuk akses database, dan `model` untuk representasi data.
  
 ```
-capstone_feast_part_2/
+capstone_feast_final/
 ├── src/main/java/capstone_feast/
 │   ├── Capstone_feast.java        # Main class (entry point aplikasi)
 │   │
