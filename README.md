@@ -255,8 +255,33 @@ Program ini menerapkan empat pilar OOP, terutama pada hierarki class pengguna (`
 ### 1️⃣ Encapsulation (Enkapsulasi)   
 Seluruh atribut pada class `Pengguna` dideklarasikan **`private`**, sehingga tidak dapat diakses langsung dari luar class. Data hanya bisa dibaca dan diubah melalui **getter dan setter** yang bersifat `public`. Prinsip yang sama dipakai pada class `Admin` (`tanggalDiangkat`) dan `Staff` (`shift`, `password`).
  
-📄 `model/Pengguna.java`
-
+📄 `model/Pengguna.java`    
+![Encapsulation Pengguna](img/encap-pengguna.png)   
+ 
+### 2️⃣ Inheritance (Pewarisan)
+`Admin` dan `Staff` adalah *subclass* yang mewarisi class induk `Pengguna` melalui kata kunci **`extends`**. Atribut umum (`id`, `namaPengguna`, `username`, `statusAkun`, `nomorTelepon`) cukup ditulis sekali di `Pengguna` dan dipakai bersama, sedangkan atribut khusus ditambahkan di tiap subclass, `Admin` memiliki `tanggalDiangkat`, `Staff` memiliki `shift`, `role`  dan `password`. Constructor subclass memanggil constructor induk dengan **`super`**.
+ 
+📄 `model/Admin.java`    
+![Encapsulation Pengguna](img/inher-admin.png)     
+ 
+📄 `model/Staff.java`    
+![Encapsulation Pengguna](img/inher-staff.png)     
+ 
+### 3️⃣ Polymorphism (Polimorfisme)
+Polimorfisme diterapkan melalui **method overriding**. Method `getRole()` dideklarasikan di class induk `Pengguna`, lalu di-*override* oleh `Admin` dan `Staff` dengan isi yang berbeda sesuai perannya. Dengan begitu, pemanggilan method yang sama (`getRole()`) menghasilkan perilaku yang berbeda tergantung objeknya, objek `Admin` mengembalikan `"Admin"`, sedangkan objek `Staff` mengembalikan `"Staff"`.
+ 
+📄 `model/Admin.java`   
+![Encapsulation Pengguna](img/over-admin.png)       
+ 
+📄 `model/Staff.java`      
+![Encapsulation Pengguna](img/over-staff.png)       
+ 
+### 4️⃣ Abstraction (Abstraksi)
+`Pengguna` dideklarasikan sebagai **`abstract class`**, sehingga tidak dapat dibuat objeknya langsung dan hanya berfungsi sebagai kerangka bagi `Admin` dan `Staff`. Di dalamnya terdapat **abstract method** `getRole()` yang hanya berisi method. Cara kerjanya diserahkan ke masing-masing subclass, sehingga setiap jenis pengguna wajib mendefinisikan perannya sendiri.
+ 
+📄 `model/Pengguna.java`   
+![Encapsulation Pengguna](img/abs-pengguna.png)       
+![Encapsulation Pengguna](img/abs-role.png)       
  
 ---
  
