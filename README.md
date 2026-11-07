@@ -286,7 +286,20 @@ Polimorfisme diterapkan melalui **method overriding**. Method `getRole()` didekl
 ---
  
 ## 7. 💻 Cara Penggunaan Program
-  
+ 
+### 🛠️ Prasyarat
+ 
+Pastikan perangkat sudah memiliki:
+ 
+| Kebutuhan | Keterangan |
+|---|---|
+| **JDK (Java Development Kit)** | Project dikembangkan dengan JDK 26 |
+| **NetBeans IDE** | Sudah menyertakan Maven, jadi tidak perlu instal Maven terpisah |
+| **Laragon** | Menyediakan server MySQL untuk terhubung dan mengelola database |      
+
+         
+### 🖼️ Panduan Penggunaan         
+
 ---
  
 ## 8. 👥 Kontributor
@@ -298,5 +311,8 @@ Polimorfisme diterapkan melalui **method overriding**. Method `getRole()` didekl
 | 3 | Muhammad Aqia Yudha Yulian Putra | 2509116105 |
 | 4 | Meilanie | 2509116109 |
  
----
+---         
+
+[⬆️ Kembali ke Atas](#-sistem-informasi-pengelolaan-stok-bahan-baku-produksi-dan-distribusi-produk-jadi-berbasis-java)
+
  
